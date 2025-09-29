@@ -1,7 +1,32 @@
 {
-  "name": "Laravel Codespace",
-  "image": "mcr.microsoft.com/devcontainers/php:8.2",
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y default-mysql-server unzip curl git nodejs npm php-mbstring php-xml php-bcmath && sudo service mysql start && sudo mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;\" && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && composer install && npm install && cp .env.example .env && php artisan key:generate",
-  "forwardPorts": [8000],
-  "remoteUser": "vscode"
+    "name": "codespaces-laravel",
+    "dockerComposeFile": ["docker-compose.yml"],
+    "workspaceFolder": "/workspace",
+    "service": "app",
+    "shutdownAction": "stopCompose",
+    "extensions": [
+        "editorconfig.editorconfig",
+        "ryannaddy.laravel-artisan",
+        "amiralizadeh9480.laravel-extra-intellisense",
+        "stef-k.laravel-goto-controller",
+        "codingyu.laravel-goto-view",
+        "mikestead.dotenv",
+        "eg2.tslint",
+        "christian-kohler.path-intellisense",
+        "esbenp.prettier-vscode",
+        "CoenraadS.bracket-pair-colorizer"
+    ],
+    "settings": {
+        "#terminal.integrated.shell.linux": "/bin/bash"
+    },
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    "forwardPorts": [80],
+
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "cp .env.example .env && composer install && php artisan key:generate && yarn install && yarn run development",
+    "portsAttributes": {
+        "80": {
+            "label": "HTTP"
+        }
+    }
 }
