@@ -2,8 +2,14 @@
   "name": "Laravel Codespace",
   "image": "mcr.microsoft.com/devcontainers/php:8.2",
   "features": {
-    "mysql": "latest",
-    "node": "latest"
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0",
+      "rootPassword": "root"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    "ghcr.io/devcontainers/features/composer:1": {}
   },
   "postCreateCommand": "composer install && npm install && cp .env.example .env && php artisan key:generate",
   "forwardPorts": [8000],
