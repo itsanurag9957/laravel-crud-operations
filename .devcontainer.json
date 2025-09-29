@@ -1,0 +1,11 @@
+{
+  "name": "Laravel Codespace",
+  "image": "mcr.microsoft.com/devcontainers/php:8.2",
+  "features": {
+    "mysql": "latest",
+    "node": "latest"
+  },
+  "postCreateCommand": "composer install && npm install && cp .env.example .env && php artisan key:generate",
+  "forwardPorts": [8000],
+  "remoteUser": "vscode"
+}
