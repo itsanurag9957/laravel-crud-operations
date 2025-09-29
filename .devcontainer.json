@@ -1,13 +1,12 @@
 {
   "name": "Laravel Codespace",
   "image": "mcr.microsoft.com/devcontainers/php:8.2",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "20"
-    },
-    "ghcr.io/devcontainers/features/composer:1": {}
-  },
-  "postCreateCommand": "apt-get update && apt-get install -y default-mysql-server && service mysql start && mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;\" && composer install && npm install && cp .env.example .env && php artisan key:generate",
+  "postCreateCommand": "apt-get update && \
+    apt-get install -y default-mysql-server unzip curl git nodejs npm php-mbstring php-xml php-bcmath && \
+    service mysql start && \
+    mysql -e \"ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'; FLUSH PRIVILEGES;\" && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer install && npm install && cp .env.example .env && php artisan key:generate",
   "forwardPorts": [8000],
   "remoteUser": "vscode"
 }
