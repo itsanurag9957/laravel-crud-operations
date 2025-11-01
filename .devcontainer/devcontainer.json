@@ -1,0 +1,18 @@
+{
+  "name": "Laravel Codespace",
+  "image": "mcr.microsoft.com/devcontainers/php:8.2-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers/features/composer:2": {}
+  },
+  "postCreateCommand": "composer install && npm install && cp .env.example .env && php artisan key:generate",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Laravel App",
+      "onAutoForward": "openPreview"
+    }
+  }
+}
